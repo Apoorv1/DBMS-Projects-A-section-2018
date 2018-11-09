@@ -35,13 +35,13 @@ CREATE TABLE IF NOT EXISTS `factory_table` (
   `password` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
+//////////////////////////////
 CREATE TABLE IF NOT EXISTS `products` (
   `product_id` int(5) NOT NULL AUTO_INCREMENT,
 
   `id` int(5) NOT NULL,
   `product_name` text NOT NULL,
-  `cost` int(12) NOT NULL,
+  `cost` float(12) NOT NULL,
   PRIMARY KEY (`product_id`,`id`),
   FOREIGN KEY fkey(`id`)
   REFERENCES factory_table(`id`)
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 CREATE TABLE IF NOT EXISTS `particular_factory` (
   `id` int(5) NOT NULL,
-  `employee_tot_salary` int(10),
+  `employee_tot_salary` float(10),
 
   FOREIGN KEY PKEY(`id`)
   REFERENCES factory_table(`id`)
@@ -64,10 +64,9 @@ CREATE TABLE IF NOT EXISTS `customers` (
 
   `id` int(5) NOT NULL,
   `customer_name` text NOT NULL,
-  `product_quantity` int(12) NOT NULL,
   `month` date NOT NULL,
-  `transportation_cost` int(12) NOT NULL,
-  `bill_amount` int(12) NOT NULL,
+  `transportation_cost` float(12) NOT NULL,
+  `bill_amount` float(12) NOT NULL,
   PRIMARY KEY(`customer_id`,`id`),
   FOREIGN KEY fc(`id`)
   REFERENCES factory_table(`id`)
@@ -76,19 +75,32 @@ CREATE TABLE IF NOT EXISTS `customers` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `statistics` (
+  `stat_id` int(5) NOT NULL AUTO_INCREMENT,
+
   `id` int(5) NOT NULL,
   `month` date NOT NULL,
-  `maintainence` int(12) NOT NULL,
-  `raw_material_cost` int(12) NOT NULL,
-  `electricity` int(12) NOT NULL,
+  `maintainence` float(12) NOT NULL,
+  `raw_material_cost` float(12) NOT NULL,
+  `electricity` float(12) NOT NULL,
 
-  PRIMARY KEY(`id`,`month`),
+  PRIMARY KEY(`stat_id`,`id`),
   FOREIGN KEY fc(`id`)
   REFERENCES factory_table(`id`)
   ON DELETE CASCADE
 
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
+
+CREATE TABLE IF NOT EXISTS `orders` (
+  `customer_id` int(5) NOT NULL,
+  `product_id` int(5) NOT NULL,
+  `product_quantity` int(12) NOT NULL,
+  PRIMARY KEY(`customer_id`,`product_id`),
+  FOREIGN KEY fccc(`customer_id`)
+  REFERENCES customers(`customer_id`)
+  ON DELETE CASCADE
+
+) ENGINE=InnoDB;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

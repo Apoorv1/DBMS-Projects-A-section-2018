@@ -1,0 +1,54 @@
+<html lang="en">
+
+   <%- include header %>
+   <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Graph</h1>
+        <div id="chart"></div>
+
+      </div>
+  </body>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+  console.log("<%= data %>");
+  var result = "<%= data %>";
+  console.log(result);
+  var result1 = JSON. stringify(result);
+  console.log("r="+result);
+  console.log("r1="+result1);
+
+
+  // Load google charts
+  //$.get('http://127.0.0.1:8080/home/graph', {}, function(data){
+  //      console.log("hi");
+
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  // Draw the chart and set the chart values
+  function drawChart() {
+       var data = google.visualization.arrayToDataTable([
+         ['Year', 'Sales', 'Expenses', 'Profit'],
+         ['2014', 1000, 400, 200],
+         ['2015', 1170, 460, 250],
+         ['2016', 660, 1120, 300],
+         ['2017', 1030, 540, 350]
+       ]);
+
+       var options = {
+         chart: {
+           title: 'Company Performance',
+           subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+           'width': 50,
+           'height': 70,
+         },
+         bars: 'horizontal' // Required for Material Bar Charts.
+       };
+
+       var chart = new google.charts.Bar(document.getElementById('chart'));
+
+       chart.draw(data, google.charts.Bar.convertOptions(options));
+     }
+  </script>
+
+</html>

@@ -45,6 +45,7 @@ app.post('/signup', user.signup);//call for signup post
 app.get('/login', routes.index);//call for login page
 app.post('/login', user.login);//call for login post
 app.get('/home/dashboard', user.dashboard);//call for dashboard page after login
+app.post('/home/dashboard', user.dashboard);//call for dashboard page after login
 app.get('/home/logout', user.logout);//call for logout
 app.get('/home/profile',user.profile);//to render users profile
 app.get('/home/product', user.product);
@@ -53,7 +54,12 @@ app.get('/home/customers', user.customers);
 app.post('/home/customers', user.customers);
 app.get('/home/delete_product', user.delete_product);
 app.get('/home/delete_customer', user.delete_customer);
+app.get('/home/graph', user.graph);
 
+app.post('/home/credentials', user.credentials);
+app.get('/home/credentials', user.credentials);
+
+app.get('/home/delete_credentials', user.delete_credentials);
 
 
 

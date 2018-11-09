@@ -8,5 +8,10 @@
         <p>
           <a class="btn btn-lg btn-primary" href="/home/profile" role="button">Profile view »</a>
         </p>
+
+
+
       </div>
+
     <%- include footer %>
+    SELECT year(month), COUNT(*) c FROM statistics GROUP BY month HAVING c > 1;
